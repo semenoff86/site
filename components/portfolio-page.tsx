@@ -107,6 +107,11 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
               </div>
             </div>
 
+            <h1 className="text-fluid max-w-3xl font-semibold text-[var(--card-foreground)]">
+              {locale === "ru"
+                ? "Промпт-инженер и AI-разработчик: создание AI-ассистентов на заказ"
+                : "Prompt Engineer and AI Developer building custom AI assistants"}
+            </h1>
             <p className="text-fluid mt-3 max-w-2xl text-[var(--muted-foreground)]">
               {t("heroSubtitle")}
             </p>
@@ -238,10 +243,10 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
             <div>
               <p className="text-[var(--muted-foreground)]">{t("ctaSubtitle")}</p>
               <a
-                href="mailto:your@email.com"
+                href="mailto:semenoff2007@gmail.com"
                 className="mt-2 inline-flex items-center gap-2 text-[var(--link)] hover:text-[var(--link-hover)]"
               >
-                <Mail size={16} /> your@email.com
+                <Mail size={16} /> semenoff2007@gmail.com
               </a>
             </div>
             <div className="flex gap-3">

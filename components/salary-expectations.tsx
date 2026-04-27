@@ -9,18 +9,21 @@ import {
   Handshake,
   Rocket,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { ComponentType } from "react";
 
 type SalaryModelId = "fullTime" | "freelance" | "projectBased" | "partTime";
 
 export function SalaryExpectations() {
   const t = useTranslations("Salary");
+  const locale = useLocale() as "ru" | "en";
+  const isRu = locale === "ru";
 
   const models: Array<{
     id: SalaryModelId;
     icon: ComponentType<{ size?: number; className?: string }>;
     rate: string;
+    currency: string;
     periodKey: "perMonth" | "perHour" | "fromProject";
     periodAmount?: string;
     details: Array<"desc" | "benefits" | "hours" | "ideal" | "turnaround" | "examples" | "support" | "bestFor">;
@@ -28,29 +31,33 @@ export function SalaryExpectations() {
     {
       id: "fullTime",
       icon: Briefcase,
-      rate: "4,000 — 5,500",
+      rate: isRu ? "303 000 — 416 000" : "4,000 — 5,500",
+      currency: isRu ? "₽" : "USD",
       periodKey: "perMonth",
       details: ["desc", "benefits", "hours"],
     },
     {
       id: "freelance",
       icon: Clock3,
-      rate: "25 — 35",
+      rate: isRu ? "2 000 — 3 000" : "25 — 35",
+      currency: isRu ? "₽" : "USD",
       periodKey: "perHour",
       details: ["desc", "ideal", "turnaround"],
     },
     {
       id: "projectBased",
       icon: Rocket,
-      rate: "2,000",
+      rate: isRu ? "152 000" : "2,000",
+      currency: isRu ? "₽" : "USD",
       periodKey: "fromProject",
-      periodAmount: "2,000 USD",
+      periodAmount: isRu ? "₽152 000" : "2,000 USD",
       details: ["desc", "examples", "support"],
     },
     {
       id: "partTime",
       icon: Handshake,
-      rate: "1,500 — 2,500",
+      rate: isRu ? "114 000 — 189 000" : "1,500 — 2,500",
+      currency: isRu ? "₽" : "USD",
       periodKey: "perMonth",
       details: ["desc", "hours", "bestFor"],
     },
@@ -70,25 +77,6 @@ export function SalaryExpectations() {
         <p className="mt-2 text-sm text-[var(--muted-foreground)] sm:text-base">{t("subtitle")}</p>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        className="gradient-border mt-6 rounded-2xl border border-[color:var(--border)] bg-[var(--card)] p-5 text-center shadow-[var(--card-shadow)] sm:p-7"
-      >
-        <p className="text-xs uppercase tracking-[0.16em] text-[var(--muted-foreground)]">{t("monthlyRate")}</p>
-        <p className="mt-2 bg-gradient-to-r from-[#A855F7] to-[#06B6D4] bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">
-          $3,000 — $5,000
-        </p>
-        <p className="mt-2 text-sm text-[var(--muted-foreground)]">USD / {t("perMonth")}</p>
-        <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs text-[var(--card-foreground)] sm:gap-3 sm:text-sm">
-          <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">160 hours/month</span>
-          <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">
-            Negotiable for long-term commitment
-          </span>
-        </div>
-      </motion.div>
-
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         {models.map((model, idx) => {
           const Icon = model.icon;
@@ -107,7 +95,7 @@ export function SalaryExpectations() {
                   <p className="mt-1 text-sm text-[var(--muted-foreground)]">
                     {model.periodKey === "fromProject"
                       ? formatPeriod(model.periodKey, model.periodAmount)
-                      : `${t("rateRange", { min: model.rate.split(" — ")[0], max: model.rate.split(" — ")[1] })} ${formatPeriod(model.periodKey)}`}
+                      : `${t("rateRange", { min: model.rate.split(" — ")[0], max: model.rate.split(" — ")[1], currency: model.currency })} ${formatPeriod(model.periodKey)}`}
                   </p>
                 </div>
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[var(--muted)] text-[var(--year)]">

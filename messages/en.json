@@ -12,7 +12,7 @@
   "projects": "Projects",
   "screenshotPlaceholder": "Screenshot 400 x 240",
   "viewDetails": "View details",
-  "investment": "Investment in project",
+  "investment": "The Price of Intelligence",
   "flexibleFormat": "Flexible format",
   "salaryRange": "$3000 - $5000 USD / month",
   "salaryModes": "full-time / project-based / part-time",
@@ -22,7 +22,7 @@
   "terminalInitial": "Type 'help' to start.",
   "terminalUnknown": "unknown command",
   "Salary": {
-    "title": "Investment in Project",
+    "title": "The Price of Intelligence",
     "subtitle": "Flexible cooperation models",
     "monthlyRate": "Monthly Investment Range",
     "hourlyRate": "Hourly Rate",
@@ -31,7 +31,7 @@
     "freelance": "Freelance / Contract",
     "projectBased": "Project-Based",
     "partTime": "Part-Time / Retainer",
-    "rateRange": "{min} — {max} USD",
+    "rateRange": "{currency}{min} — {currency}{max}",
     "perMonth": "per month",
     "perHour": "per hour",
     "fromProject": "from {amount} per project",
@@ -44,6 +44,8 @@
     "upfront": "30-50% upfront for new clients",
     "reporting": "Weekly reporting & transparent communication",
     "customCta": "Need custom arrangement? Let's talk →",
+    "heroHours": "Based on 160 hours/month",
+    "heroNegotiable": "Negotiable for long-term commitment",
     "models": {
       "fullTime": {
         "desc": "Dedicated team member, full integration",

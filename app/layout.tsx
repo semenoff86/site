@@ -4,8 +4,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://itprompt.ru"),
   title: "AI Engineer Portfolio",
   description: "Portfolio for Prompt Engineer and AI Agent Developer",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

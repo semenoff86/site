@@ -399,7 +399,7 @@ export function InteractiveTerminal({ locale }: { locale: "ru" | "en" }) {
     const commandResults: Record<string, string> = {
       help: t("terminal.games.common.help"),
       skills: "Next.js, TypeScript, Python, FastAPI, OpenAI API, LangChain, n8n, PostgreSQL",
-      contact: "telegram: @your_handle | email: your@email.com",
+      contact: "telegram: @your_handle | email: semenoff2007@gmail.com",
       about:
         locale === "ru"
           ? "Prompt Engineer, который внедряет AI-решения в бизнес-процессы."
