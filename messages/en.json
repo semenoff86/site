@@ -20,5 +20,101 @@
   "ctaSubtitle": "Start a project today.",
   "telegram": "Message on Telegram",
   "terminalInitial": "Type 'help' to start.",
-  "terminalUnknown": "unknown command"
+  "terminalUnknown": "unknown command",
+  "Salary": {
+    "title": "Investment in Project",
+    "subtitle": "Flexible cooperation models",
+    "monthlyRate": "Monthly Investment Range",
+    "hourlyRate": "Hourly Rate",
+    "projectRate": "Project Rate",
+    "fullTime": "Full-Time Employment",
+    "freelance": "Freelance / Contract",
+    "projectBased": "Project-Based",
+    "partTime": "Part-Time / Retainer",
+    "rateRange": "{min} — {max} USD",
+    "perMonth": "per month",
+    "perHour": "per hour",
+    "fromProject": "from {amount} per project",
+    "remote": "Remote Worldwide",
+    "office": "Office (if available)",
+    "hybrid": "Hybrid",
+    "relocate": "Willing to relocate",
+    "paymentMethods": "Payment: Wise / PayPal / Crypto (USDT) / Bank Transfer",
+    "nda": "Standard NDA included",
+    "upfront": "30-50% upfront for new clients",
+    "reporting": "Weekly reporting & transparent communication",
+    "customCta": "Need custom arrangement? Let's talk →",
+    "models": {
+      "fullTime": {
+        "desc": "Dedicated team member, full integration",
+        "benefits": "Paid vacation, sick days",
+        "hours": "40 hours/week"
+      },
+      "freelance": {
+        "desc": "Flexible hours, task-based cooperation",
+        "ideal": "Ideal for features, fixes, and consultation",
+        "turnaround": "Fast turnaround: 24-48h response"
+      },
+      "projectBased": {
+        "desc": "Fixed scope, fixed price, predictable budget",
+        "examples": "Bot: $1.5-3k | AI Agent: $3-7k | Website: $2.5-5k",
+        "support": "Includes 2 weeks of free support"
+      },
+      "partTime": {
+        "desc": "Ongoing partnership with priority access",
+        "hours": "20 hours/week (flexible)",
+        "bestFor": "Best for maintenance, consultations, optimization"
+      }
+    }
+  },
+  "terminal": {
+    "games": {
+      "wordle": {
+        "title": "WORDLE",
+        "subtitle": "5 letters, {attempts} attempts",
+        "win": "🎉 You won! Found \"{word}\" in {attempts} attempts!",
+        "lose": "😔 Game over! The word was \"{word}\"",
+        "guessPrompt": "Guess #{attempt}: ",
+        "invalidLength": "Please enter a 5-letter word",
+        "notInDictionary": "Word not in dictionary",
+        "playAgain": "Type 'wordle' to play again",
+        "remainingAttempts": "{attempts} attempts remaining",
+        "languagePrompt": "Choose language: EN / RU",
+        "languageSelected": "Language set to {lang}"
+      },
+      "guess": {
+        "title": "NUMBER GUESSING GAME",
+        "subtitle": "Guess the number (1-100)",
+        "win": "🎉 Correct! You got it in {attempts} attempts!",
+        "lose": "😔 Out of attempts! The number was {number}",
+        "tooHigh": "📈 Too high! Try lower",
+        "tooLow": "📉 Too low! Try higher",
+        "invalidInput": "Please enter a number between 1 and 100",
+        "playAgain": "Type 'guess' to play again",
+        "remainingAttempts": "{attempts} attempts remaining",
+        "languagePrompt": "Choose language: EN / RU"
+      },
+      "rps": {
+        "title": "ROCK PAPER SCISSORS",
+        "prompt": "Choose: rock, paper, scissors",
+        "youChose": "You chose {choice}",
+        "computerChose": "Computer chose {choice}",
+        "win": "🎉 You win!",
+        "lose": "😔 You lose!",
+        "tie": "🤝 It's a tie!",
+        "invalidChoice": "Invalid choice. Choose rock, paper, or scissors",
+        "score": "Score: You {player} - {computer} Computer",
+        "playAgain": "Type 'rps' to play another round",
+        "languagePrompt": "Choose language: EN / RU"
+      },
+      "common": {
+        "chooseLanguage": "🌐 Choose language before starting:",
+        "en": "EN - English",
+        "ru": "RU - Русский",
+        "cancel": "Type 'cancel' to abort",
+        "exiting": "Exiting game...",
+        "help": "Available commands: help, skills, contact, about, experience, projects, wordle, guess, rps, clear"
+      }
+    }
+  }
 }

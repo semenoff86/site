@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -18,8 +19,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className="h-full antialiased"
     >
-      <body className="min-h-full bg-background text-foreground">
+      <body className="noise-overlay min-h-full bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ScrollProgress />
           {children}
         </ThemeProvider>
       </body>

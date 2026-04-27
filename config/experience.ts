@@ -81,34 +81,36 @@ export const skillGroups: SkillGroup[] = [
       "OpenAI API",
       "RAG",
       "Fine-tuning",
+      "Prompt Evaluation",
+      "Guardrails Design",
     ],
   },
   {
     title: { ru: "Automation", en: "Automation" },
-    items: ["Make/n8n", "Albato", "Zapier", "Python scripts", "CRM Workflows"],
+    items: ["Make/n8n", "Albato", "Zapier", "Python scripts", "CRM Workflows", "Webhook Orchestration", "API Integrations"],
   },
   {
     title: { ru: "Python Backend", en: "Python Backend" },
-    items: ["FastAPI", "Django", "Aiogram", "Asyncio"],
+    items: ["FastAPI", "Django", "Aiogram", "Asyncio", "REST API Design", "Pydantic"],
   },
   {
     title: { ru: "AI Agent Engineering", en: "AI Agent Engineering" },
-    items: ["LangChain", "LangFlow", "Tool Calling", "MVP to Production"],
+    items: ["LangChain", "LangFlow", "Tool Calling", "MVP to Production", "Multi-agent Flows", "Agent Memory"],
   },
   {
     title: { ru: "Мультимодальность", en: "Multimodal AI" },
-    items: ["Image Analysis", "Speech-to-Text", "Text-to-Speech", "Vision LLMs"],
+    items: ["Image Analysis", "Speech-to-Text", "Text-to-Speech", "Vision LLMs", "Audio Transcription", "OCR Pipelines"],
   },
   {
     title: { ru: "Frontend", en: "Frontend" },
-    items: ["Next.js", "Tailwind", "TypeScript", "Framer Motion"],
+    items: ["Next.js", "Tailwind", "TypeScript", "Framer Motion", "Responsive UI", "Accessibility (a11y)"],
   },
   {
     title: { ru: "Базы данных", en: "Databases" },
-    items: ["PostgreSQL", "Redis", "Supabase", "Vector DB", "Knowledge Base Pipelines"],
+    items: ["PostgreSQL", "Redis", "Supabase", "Vector DB", "Knowledge Base Pipelines", "SQL Optimization", "Data Modeling"],
   },
   {
     title: { ru: "Инструменты", en: "Tools" },
-    items: ["Git", "Docker", "Cursor", "Figma"],
+    items: ["Git", "Docker", "Cursor", "Figma", "Postman", "GitHub Actions"],
   },
 ];
