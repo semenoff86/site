@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+  --border: #e2e8f0;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
+  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --link: #7c3aed;
+  --link-hover: #4c1d95;
+  --year: #0891b2;
+  --terminal-bg: #f8fafc;
+  --terminal-output: #0891b2;
+  --terminal-input: #334155;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0f;
+  --foreground: #f4f4f5;
+  --card: rgba(10, 10, 15, 0.72);
+  --card-foreground: #f4f4f5;
+  --muted: rgba(255, 255, 255, 0.08);
+  --muted-foreground: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 20px 60px rgba(7, 10, 20, 0.35);
+  --card-shadow: 0 12px 40px rgba(6, 182, 212, 0.08);
+  --card-shadow-hover: 0 10px 32px rgba(168, 85, 247, 0.2);
+  --primary: #06b6d4;
+  --primary-hover: #22d3ee;
+  --link: #67e8f9;
+  --link-hover: #a5f3fc;
+  --year: #a5f3fc;
+  --terminal-bg: rgba(0, 0, 0, 0.4);
+  --terminal-output: #7dd3fc;
+  --terminal-input: #e2e8f0;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.premium-light-bg {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(124, 58, 237, 0.1), transparent 36%),
+    radial-gradient(circle at 85% 20%, rgba(8, 145, 178, 0.1), transparent 34%),
+    radial-gradient(circle at 50% 85%, rgba(99, 102, 241, 0.08), transparent 36%);
+}
+
+.dark .premium-light-bg {
+  background-image: none;
+}
+
+.premium-noise {
+  position: relative;
+}
+
+.premium-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: radial-gradient(rgba(15, 23, 42, 0.04) 0.6px, transparent 0.6px);
+  background-size: 4px 4px;
+}
+
+.dark .premium-noise::before {
+  opacity: 0;
 }
