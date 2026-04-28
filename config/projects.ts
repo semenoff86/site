@@ -58,14 +58,4 @@ export const projects: Project[] = [
     image: "/project-4.svg",
     link: "#",
   },
-  {
-    name: { ru: "Animated Startup Landing", en: "Animated Startup Landing" },
-    description: {
-      ru: "Маркетинговый лендинг: путь от Figma до production с упором на конверсию.",
-      en: "Marketing landing page: Figma to production with a conversion-first approach.",
-    },
-    stack: ["Next.js", "Tailwind", "Framer Motion", "SEO"],
-    image: "/project-5.svg",
-    link: "#",
-  },
 ];

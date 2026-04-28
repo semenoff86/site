@@ -22,6 +22,7 @@ export function SalaryExpectations() {
   const models: Array<{
     id: SalaryModelId;
     icon: ComponentType<{ size?: number; className?: string }>;
+    rateLabel?: string;
     rate: string;
     currency: string;
     periodKey: "perMonth" | "perHour" | "fromProject";
@@ -31,6 +32,7 @@ export function SalaryExpectations() {
     {
       id: "fullTime",
       icon: Briefcase,
+      rateLabel: isRu ? "250 000 ₽/мес" : undefined,
       rate: isRu ? "303 000 — 416 000" : "4,000 — 5,500",
       currency: isRu ? "₽" : "USD",
       periodKey: "perMonth",
@@ -39,6 +41,7 @@ export function SalaryExpectations() {
     {
       id: "freelance",
       icon: Clock3,
+      rateLabel: isRu ? "2 000 ₽/час" : undefined,
       rate: isRu ? "2 000 — 3 000" : "25 — 35",
       currency: isRu ? "₽" : "USD",
       periodKey: "perHour",
@@ -47,15 +50,17 @@ export function SalaryExpectations() {
     {
       id: "projectBased",
       icon: Rocket,
+      rateLabel: isRu ? "150 000 ₽/проект" : undefined,
       rate: isRu ? "152 000" : "2,000",
       currency: isRu ? "₽" : "USD",
       periodKey: "fromProject",
-      periodAmount: isRu ? "₽152 000" : "2,000 USD",
+      periodAmount: isRu ? "150 000 ₽" : "2,000 USD",
       details: ["desc", "examples", "support"],
     },
     {
       id: "partTime",
       icon: Handshake,
+      rateLabel: isRu ? "100 000 ₽/мес" : undefined,
       rate: isRu ? "114 000 — 189 000" : "1,500 — 2,500",
       currency: isRu ? "₽" : "USD",
       periodKey: "perMonth",
@@ -93,7 +98,9 @@ export function SalaryExpectations() {
                 <div>
                   <h3 className="text-base font-semibold text-[var(--card-foreground)] sm:text-lg">{t(model.id)}</h3>
                   <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-                    {model.periodKey === "fromProject"
+                    {model.rateLabel
+                      ? model.rateLabel
+                      : model.periodKey === "fromProject"
                       ? formatPeriod(model.periodKey, model.periodAmount)
                       : `${t("rateRange", { min: model.rate.split(" — ")[0], max: model.rate.split(" — ")[1], currency: model.currency })} ${formatPeriod(model.periodKey)}`}
                   </p>
@@ -130,13 +137,6 @@ export function SalaryExpectations() {
         <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-500">
           {t("relocate")}
         </span>
-      </div>
-
-      <div className="mt-6 text-center text-sm text-[var(--muted-foreground)]">
-        <p>✓ {t("paymentMethods")}</p>
-        <p className="mt-1">
-          ✓ {t("nda")} • {t("upfront")} • {t("reporting")}
-        </p>
       </div>
 
       <div className="mt-6 text-center">

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
+import { WebVitalsReporter } from "@/components/web-vitals-reporter";
+import { firaCode, inter } from "@/app/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,10 +24,14 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className="h-full antialiased"
+      className={`${inter.variable} ${firaCode.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preload" href="/gemini-2.jpg" as="image" fetchPriority="high" />
+      </head>
       <body className="noise-overlay min-h-full bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <WebVitalsReporter />
           <ScrollProgress />
           {children}
         </ThemeProvider>

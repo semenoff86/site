@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import enMessages from "@/messages/en.json";
 import ruMessages from "@/messages/ru.json";
 
@@ -82,11 +82,25 @@ function getWordleFeedback(guess: string, target: string) {
   return feedback.join("");
 }
 
-export function InteractiveTerminal({ locale }: { locale: "ru" | "en" }) {
+export function InteractiveTerminal({
+  locale,
+  onClose,
+  onNavigateProjects,
+}: {
+  locale: "ru" | "en";
+  onClose?: () => void;
+  onNavigateProjects?: () => void;
+}) {
   const t = useTranslations();
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<string[]>([t("terminalInitial")]);
-  const [preferredGameLanguage, setPreferredGameLanguage] = useState<Language>("ru");
+  const [preferredGameLanguage, setPreferredGameLanguage] = useState<Language>(() => {
+    if (typeof window === "undefined") {
+      return "ru";
+    }
+    const saved = window.localStorage.getItem(GAME_LANG_STORAGE_KEY);
+    return saved === "en" || saved === "ru" ? saved : "ru";
+  });
   const [rpsScore, setRpsScore] = useState({ player: 0, computer: 0 });
   const [gameState, setGameState] = useState<GameState>({
     active: null,
@@ -96,13 +110,6 @@ export function InteractiveTerminal({ locale }: { locale: "ru" | "en" }) {
     maxAttempts: 0,
     gameData: null,
   });
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem(GAME_LANG_STORAGE_KEY);
-    if (saved === "en" || saved === "ru") {
-      setPreferredGameLanguage(saved);
-    }
-  }, []);
 
   const defaultGames = useMemo(
     () => (locale === "ru" ? (ruMessages as Record<string, unknown>) : (enMessages as Record<string, unknown>)),
@@ -386,6 +393,11 @@ export function InteractiveTerminal({ locale }: { locale: "ru" | "en" }) {
   };
 
   const handleCommand = (command: string) => {
+    if (command === "exit") {
+      onClose?.();
+      return;
+    }
+
     if (command === "clear") {
       setHistory([]);
       return;
@@ -396,8 +408,14 @@ export function InteractiveTerminal({ locale }: { locale: "ru" | "en" }) {
       return;
     }
 
+    if (command === "projects") {
+      onNavigateProjects?.();
+      appendOutput(locale === "ru" ? "Переход к разделу проектов..." : "Opening projects section...");
+      return;
+    }
+
     const commandResults: Record<string, string> = {
-      help: t("terminal.games.common.help"),
+      help: t("terminalHelpDetailed"),
       skills: "Next.js, TypeScript, Python, FastAPI, OpenAI API, LangChain, n8n, PostgreSQL",
       contact: "telegram: @your_handle | email: semenoff2007@gmail.com",
       about:
@@ -408,10 +426,6 @@ export function InteractiveTerminal({ locale }: { locale: "ru" | "en" }) {
         locale === "ru"
           ? "Опыт: Prompt Engineering, AI-ассистенты, интеграции и автоматизация."
           : "Experience: Prompt engineering, AI assistants, integrations, and automation.",
-      projects:
-        locale === "ru"
-          ? "Кейсы: маркетплейс-ассистент, контент-бот, FAQ/RAG ассистент."
-          : "Projects: marketplace assistant, content bot, and FAQ/RAG assistant.",
     };
 
     appendOutput(commandResults[command] ?? `${t("terminalUnknown")}: ${command}`);

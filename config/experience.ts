@@ -19,22 +19,22 @@ export type SkillGroup = {
 };
 
 export const mission: LocalizedText = {
-  ru: "Я пришел в IT через веб-разработку, а затем сфокусировался на AI и автоматизации. После обучения на продвинутой программе Prompt Engineering от Zerocoder я проектирую LLM-решения под бизнес: от prompt-стратегий и RAG до запуска MVP-ассистентов в production. Для меня важно не просто писать код, а внедрять системы, которые сокращают расходы и ускоряют процессы с измеримым результатом.",
-  en: "I got into IT through web development, then focused on AI and automation. After completing Zerocoder's advanced Prompt Engineering program, I design business-focused LLM solutions: from prompt strategies and RAG to production-ready assistant MVPs. I care about shipping systems that cut costs and speed up workflows with measurable impact.",
+  ru: "19 лет в IT: от веб-разработки, управления отделами и сетевой инфраструктуры до Data Science, ML и AI. Внедряю нейросети, ML-модели и системы автоматизации, которые реально сокращают ручной труд и ускоряют процессы.\n\nЕсли вы хотите:\n✅ автоматизировать рутинные задачи — сокращаю время обработки данных до 90%\n✅ внедрить AI для анализа заявок или клиентов — снижаю время решений с дней до часов\n✅ получить измеримый бизнес-результат — мои скоринговые модели сократили просрочки на 27%",
+  en: "19 years in IT: from web development, department leadership, and network infrastructure to Data Science, ML, and AI. I implement neural networks, ML models, and automation systems that reduce manual work and accelerate operations.\n\nIf you want to:\n✅ automate routine tasks — I reduce data processing time by up to 90%\n✅ implement AI for application or customer analysis — I reduce decision time from days to hours\n✅ get measurable business results — my scoring models reduced delinquencies by 27%",
 };
 
 export const metrics: Metric[] = [
   {
-    value: { ru: "3+ года", en: "3+ years" },
-    label: { ru: "опыта в разработке", en: "of engineering experience" },
+    value: { ru: "19 лет", en: "19 years" },
+    label: { ru: "опыта в IT", en: "of IT experience" },
   },
   {
-    value: { ru: "25+", en: "25+" },
-    label: { ru: "реализованных проектов", en: "delivered projects" },
+    value: { ru: "5+ AI/ML", en: "5+ AI/ML" },
+    label: { ru: "проектов", en: "projects" },
   },
   {
-    value: { ru: "1000+", en: "1000+" },
-    label: { ru: "часов процессов автоматизировано", en: "hours automated" },
+    value: { ru: "до 90%", en: "up to 90%" },
+    label: { ru: "автоматизации", en: "automation" },
   },
 ];
 
