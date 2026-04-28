@@ -32,7 +32,7 @@ export function SalaryExpectations() {
     {
       id: "fullTime",
       icon: Briefcase,
-      rateLabel: isRu ? "250 000 ₽/мес" : undefined,
+      rateLabel: isRu ? "от 250 000 ₽/мес" : undefined,
       rate: isRu ? "303 000 — 416 000" : "4,000 — 5,500",
       currency: isRu ? "₽" : "USD",
       periodKey: "perMonth",
@@ -41,7 +41,7 @@ export function SalaryExpectations() {
     {
       id: "freelance",
       icon: Clock3,
-      rateLabel: isRu ? "2 000 ₽/час" : undefined,
+      rateLabel: isRu ? "от 2 000 ₽/час" : undefined,
       rate: isRu ? "2 000 — 3 000" : "25 — 35",
       currency: isRu ? "₽" : "USD",
       periodKey: "perHour",
@@ -50,7 +50,7 @@ export function SalaryExpectations() {
     {
       id: "projectBased",
       icon: Rocket,
-      rateLabel: isRu ? "150 000 ₽/проект" : undefined,
+      rateLabel: isRu ? "от 150 000 ₽/проект" : undefined,
       rate: isRu ? "152 000" : "2,000",
       currency: isRu ? "₽" : "USD",
       periodKey: "fromProject",
@@ -60,7 +60,7 @@ export function SalaryExpectations() {
     {
       id: "partTime",
       icon: Handshake,
-      rateLabel: isRu ? "100 000 ₽/мес" : undefined,
+      rateLabel: isRu ? "от 100 000 ₽/мес" : undefined,
       rate: isRu ? "114 000 — 189 000" : "1,500 — 2,500",
       currency: isRu ? "₽" : "USD",
       periodKey: "perMonth",

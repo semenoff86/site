@@ -273,30 +273,63 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
         <SalaryExpectations />
 
         <Section id="contact" title={t("ctaTitle")}>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-[var(--muted-foreground)]">{t("ctaSubtitle")}</p>
+          <div className="space-y-5">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="space-y-3">
+                <p className="max-w-2xl text-[var(--muted-foreground)]">{t("ctaSubtitle")}</p>
+                <div className="flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
+                  <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustResponse")}</span>
+                  <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustStart")}</span>
+                  <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustNda")}</span>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <MagneticButton
+                  className="inline-flex items-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
+                  onClick={() => window.open("https://t.me/your_handle", "_blank", "noopener,noreferrer")}
+                >
+                  <Send size={16} /> {t("telegram")}
+                </MagneticButton>
+                <MagneticButton
+                  className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
+                  onClick={scrollToProjects}
+                >
+                  <Sparkles size={16} /> {t("ctaSecondary")}
+                </MagneticButton>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--muted)] p-4">
+              <p className="mb-3 text-sm font-medium text-[var(--card-foreground)]">{t("ctaStepsTitle")}</p>
+              <div className="grid gap-2 sm:grid-cols-3">
+                <p className="rounded-xl border border-[color:var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--muted-foreground)]">1. {t("ctaStep1")}</p>
+                <p className="rounded-xl border border-[color:var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--muted-foreground)]">2. {t("ctaStep2")}</p>
+                <p className="rounded-xl border border-[color:var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--muted-foreground)]">3. {t("ctaStep3")}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 border-t border-[color:var(--border)] pt-4 sm:flex-row sm:items-center sm:justify-between">
               <a
                 href="mailto:semenoff2007@gmail.com"
-                className="mt-2 inline-flex items-center gap-2 text-[var(--link)] hover:text-[var(--link-hover)]"
+                className="inline-flex items-center gap-2 text-[var(--link)] hover:text-[var(--link-hover)]"
               >
                 <Mail size={16} /> semenoff2007@gmail.com
               </a>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--muted-foreground)]">
+                <span className="font-medium text-[var(--card-foreground)]">{t("ctaQuickLinks")}:</span>
+                <button className="hover:text-[var(--link)]" onClick={scrollToProjects}>
+                  {t("ctaLinkProjects")}
+                </button>
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[var(--link)]">
+                  <GitBranch size={14} /> {t("ctaLinkGithub")}
+                </a>
+                <a href="mailto:semenoff2007@gmail.com" className="hover:text-[var(--link)]">
+                  {t("ctaLinkEmail")}
+                </a>
+              </div>
             </div>
-            <div className="flex gap-3">
-              <MagneticButton
-                className="inline-flex items-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
-                onClick={() => window.open("https://t.me/your_handle", "_blank", "noopener,noreferrer")}
-              >
-                <Send size={16} /> {t("telegram")}
-              </MagneticButton>
-              <MagneticButton
-                className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
-                onClick={() => window.open("https://github.com/", "_blank", "noopener,noreferrer")}
-              >
-                <GitBranch size={16} /> GitHub
-              </MagneticButton>
-            </div>
+
+            <p className="text-xs text-[var(--muted-foreground)]">{t("ctaFooterNote")}</p>
           </div>
         </Section>
       </div>
