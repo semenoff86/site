@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
-  GitBranch,
+  ChevronLeft,
   Mail,
   Send,
   Sparkles,
@@ -60,7 +60,7 @@ function Section({
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5 }}
@@ -92,13 +92,18 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
   const { resolvedTheme } = useTheme();
   const [terminalEnabled, setTerminalEnabled] = useState(false);
   const [showHeroBody, setShowHeroBody] = useState(false);
+  const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
   const heroImage = resolvedTheme === "light" ? "/gemini-2.jpg" : "/lucid-origin.jpg";
 
-  const scrollToProjects = () => {
-    const target = document.querySelector("#projects");
+  const scrollToId = (id: string, offset = 16) => {
+    const target = document.querySelector(`#${id}`);
     if (!target) return;
-    const top = target.getBoundingClientRect().top + window.scrollY - 12;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  const scrollToProjects = () => {
+    scrollToId("projects", 12);
   };
 
   useEffect(() => {
@@ -113,43 +118,64 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
         <div className="absolute right-0 top-1/3 h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.1),transparent_62%)] dark:bg-[radial-gradient(circle,rgba(59,130,246,0.2),transparent_62%)]" />
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-6 px-6 py-4 sm:py-5 lg:py-6">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-5 px-4 py-4 sm:gap-6 sm:px-6 sm:py-5 lg:py-6">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
-          className="premium-noise gradient-border rounded-3xl border border-[color:var(--glass-border)] bg-[var(--glass-bg)] p-5 backdrop-blur-xl sm:p-7"
+          className="premium-noise gradient-border rounded-3xl border border-[color:var(--glass-border)] bg-[var(--glass-bg)] p-4 backdrop-blur-xl sm:p-6"
         >
-          <div className="mb-6">
-            <div className="mb-4">
-              <div className="gradient-border relative h-[180px] overflow-hidden rounded-xl border border-[color:var(--border)] bg-[var(--muted)] sm:h-[240px]">
-                <Image
-                  src={heroImage}
-                  alt="Portfolio hero background"
-                  fill
-                  priority
-                  fetchPriority="high"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1280px"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(124,58,237,0.16),rgba(6,182,212,0.12))]" />
-                <div className="absolute right-3 top-3 z-20 flex items-center gap-2 rounded-xl border border-white/20 bg-black/30 p-1.5 backdrop-blur-md">
-                  <LocaleToggle locale={locale} />
-                  <button
-                    type="button"
-                    aria-label="Open Telegram contact"
-                    onClick={() => window.open("https://t.me/your_handle", "_blank", "noopener,noreferrer")}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--glass-border)] bg-[var(--glass-bg)] text-slate-700 backdrop-blur transition hover:scale-105 hover:text-[var(--primary)] dark:text-cyan-200 dark:hover:text-cyan-100"
-                  >
-                    <Send size={16} />
-                  </button>
-                  <ThemeToggle />
-                </div>
-                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(2,6,23,0.35),rgba(2,6,23,0.05))]" />
-              </div>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <nav className="flex flex-wrap items-center gap-2">
+              <MagneticButton
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
+                onClick={() => window.open("https://t.me/semenoff86", "_blank", "noopener,noreferrer")}
+              >
+                <Send size={16} /> {t("telegram")}
+              </MagneticButton>
+              <MagneticButton
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
+                onClick={scrollToProjects}
+              >
+                <Sparkles size={16} /> {t("viewProjects")}
+              </MagneticButton>
+              <MagneticButton
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
+                onClick={() => scrollToId("about")}
+              >
+                {t("about")}
+              </MagneticButton>
+            </nav>
+            <div className="ml-auto flex items-center gap-2 rounded-xl border border-[color:var(--border)] bg-[var(--card)]/85 p-1.5 backdrop-blur-md sm:ml-0">
+              <LocaleToggle locale={locale} />
+              <button
+                type="button"
+                aria-label="Open Telegram contact"
+                onClick={() => window.open("https://t.me/semenoff86", "_blank", "noopener,noreferrer")}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--glass-border)] bg-[var(--glass-bg)] text-slate-700 backdrop-blur transition hover:scale-105 hover:text-[var(--primary)] dark:text-cyan-200 dark:hover:text-cyan-100"
+              >
+                <Send size={16} />
+              </button>
+              <ThemeToggle />
             </div>
+          </div>
 
-            <div className="group mt-3 max-w-3xl">
+          <div className="mb-6 space-y-4">
+            <div className="gradient-border relative h-[210px] overflow-hidden rounded-xl border border-[color:var(--border)] bg-[var(--muted)] sm:h-[260px]">
+              <Image
+                src={heroImage}
+                alt="Portfolio hero background"
+                fill
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1280px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(124,58,237,0.18),rgba(6,182,212,0.14))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(2,6,23,0.35),rgba(2,6,23,0.05))]" />
+            </div>
+            <h1 className="hero-title max-w-4xl font-semibold text-[var(--card-foreground)]">{t("heroTitle1")}</h1>
+            <div className="group max-w-3xl">
               <button
                 type="button"
                 onClick={() => setShowHeroBody((prev) => !prev)}
@@ -167,7 +193,7 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
               </p>
             </div>
           </div>
-          <div className="gradient-border mt-6 rounded-2xl">
+          <div className="gradient-border mt-2 rounded-2xl">
             {terminalEnabled ? (
               <InteractiveTerminal
                 locale={locale}
@@ -175,20 +201,21 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
                 onNavigateProjects={scrollToProjects}
               />
             ) : (
-              <div className="flex h-56 flex-col items-center justify-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[var(--terminal-bg)] p-4 text-center">
+              <div className="flex h-56 flex-col justify-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[var(--terminal-bg)] p-4 font-mono text-sm text-[var(--terminal-fg)]">
+                <div className="text-left text-[var(--muted-foreground)]">{t("terminalDeferredHint")}</div>
                 <button
                   type="button"
                   onClick={() => setTerminalEnabled(true)}
-                  className="rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--primary-hover)]"
+                  className="w-full rounded-lg border border-[color:var(--border)] bg-transparent px-3 py-2 text-left transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
                 >
-                  {t("terminalOpen")}
+                  <span className="text-[var(--primary)]">visitor@portfolio:~$</span> {t("terminalOpen")}
                 </button>
               </div>
             )}
           </div>
         </motion.header>
 
-        <Section title={t("about")} hideTitle>
+        <Section id="about" title={t("about")} hideTitle>
           <blockquote className="whitespace-pre-line rounded-2xl border border-[color:var(--border)] bg-[var(--card)] p-4 text-[var(--card-foreground)] shadow-[var(--card-shadow)] sm:p-5">
             {mission[locale]}
           </blockquote>
@@ -234,104 +261,152 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
         <WorkTimeline />
 
         <Section id="projects" title={t("projects")}>
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <article
-                key={project.name.en}
-                className="project-card gradient-border group rounded-2xl border border-[color:var(--border)] bg-[var(--card)] p-4 shadow-[var(--card-shadow)] transition hover:-translate-y-1 hover:shadow-[var(--card-shadow-hover)]"
+          {expandedProjectIndex !== null ? (
+            <article className="gradient-border rounded-2xl border border-[color:var(--border)] bg-[var(--card)] p-5 shadow-[var(--card-shadow)]">
+              <button
+                type="button"
+                onClick={() => setExpandedProjectIndex(null)}
+                className="mb-4 inline-flex items-center gap-2 text-sm text-[var(--link)] transition hover:text-[var(--link-hover)]"
               >
-                {/* Screenshot block is intentionally hidden for now.
-                    Keep this markup to quickly re-enable project previews later. */}
-                {/* <div className="mb-3 h-[240px] overflow-hidden rounded-2xl border border-[color:var(--border)] bg-gradient-to-br from-purple-100 to-cyan-100 p-4 dark:from-purple-400/20 dark:to-cyan-400/20">
-                  <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-[color:var(--border)] text-center text-sm text-[var(--muted-foreground)]">
-                    {t("screenshotPlaceholder")}
+                <ChevronLeft size={14} /> {locale === "ru" ? "Назад к проектам" : "Back to projects"}
+              </button>
+
+              <h3 className="text-2xl font-semibold">{projects[expandedProjectIndex].name[locale]}</h3>
+              <p className="mt-3 max-w-4xl text-sm leading-relaxed text-[var(--muted-foreground)]">
+                {projects[expandedProjectIndex].description[locale]}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {projects[expandedProjectIndex].stack.map((tech) => (
+                  <TechTag
+                    key={tech}
+                    tech={tech}
+                    locale={locale}
+                    className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1 text-xs text-[var(--card-foreground)]"
+                  />
+                ))}
+              </div>
+
+              {projects[expandedProjectIndex].details ? (
+                <div className="mt-6 space-y-5">
+                  <div>
+                    <p className="mb-2 text-sm font-semibold text-[var(--card-foreground)]">
+                      {locale === "ru" ? "О проекте" : "About the project"}
+                    </p>
+                    <p className="max-w-4xl text-sm leading-relaxed text-[var(--muted-foreground)]">
+                      {projects[expandedProjectIndex].details?.overview[locale]}
+                    </p>
                   </div>
-                </div> */}
-                <h3 className="text-lg font-semibold">{project.name[locale]}</h3>
-                <p className="mt-2 text-sm text-slate-700 dark:text-zinc-300">{project.description[locale]}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <TechTag
-                      key={tech}
-                      tech={tech}
-                      locale={locale}
-                      className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1 text-xs text-[var(--card-foreground)]"
-                    />
-                  ))}
+
+                  <div>
+                    <p className="mb-2 text-sm font-semibold text-[var(--card-foreground)]">
+                      {locale === "ru" ? "Возможности" : "Key features"}
+                    </p>
+                    <ul className="space-y-1 text-sm text-[var(--muted-foreground)]">
+                      {projects[expandedProjectIndex].details?.features[locale].map((feature) => (
+                        <li key={feature}>- {feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <p className="mb-2 text-sm font-semibold text-[var(--card-foreground)]">
+                      {locale === "ru" ? "Технологии и реализация" : "Technology and implementation"}
+                    </p>
+                    <ul className="space-y-1 text-sm text-[var(--muted-foreground)]">
+                      {projects[expandedProjectIndex].details?.implementation[locale].map((item) => (
+                        <li key={item}>- {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <p className="text-sm text-[var(--muted-foreground)]">{projects[expandedProjectIndex].details?.source[locale]}</p>
                 </div>
-                <a
-                  href={project.link}
-                  className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--link)] transition hover:text-[var(--link-hover)]"
+              ) : null}
+            </article>
+          ) : (
+            <div className="projects-grid">
+              {projects.map((project, index) => (
+                <article
+                  key={project.name.en}
+                  className="project-card gradient-border group rounded-2xl border border-[color:var(--border)] bg-[var(--card)] p-4 shadow-[var(--card-shadow)] transition hover:-translate-y-1 hover:shadow-[var(--card-shadow-hover)]"
                 >
-                  {t("viewDetails")} <ArrowUpRight size={14} />
-                </a>
-              </article>
-            ))}
-          </div>
+                  {/* Screenshot block is intentionally hidden for now.
+                      Keep this markup to quickly re-enable project previews later. */}
+                  {/* <div className="mb-3 h-[240px] overflow-hidden rounded-2xl border border-[color:var(--border)] bg-gradient-to-br from-purple-100 to-cyan-100 p-4 dark:from-purple-400/20 dark:to-cyan-400/20">
+                    <div className="flex h-full items-center justify-center rounded-xl border border-dashed border-[color:var(--border)] text-center text-sm text-[var(--muted-foreground)]">
+                      {t("screenshotPlaceholder")}
+                    </div>
+                  </div> */}
+                  <h3 className="text-lg font-semibold">{project.name[locale]}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">{project.description[locale]}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <TechTag
+                        key={tech}
+                        tech={tech}
+                        locale={locale}
+                        className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1 text-xs text-[var(--card-foreground)]"
+                      />
+                    ))}
+                  </div>
+                  {project.details ? (
+                    <button
+                      type="button"
+                      onClick={() => setExpandedProjectIndex(index)}
+                      className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--link)] transition hover:text-[var(--link-hover)]"
+                    >
+                      {t("viewDetails")} <ArrowUpRight size={14} />
+                    </button>
+                  ) : (
+                    <a
+                      href={project.link}
+                      className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--link)] transition hover:text-[var(--link-hover)]"
+                    >
+                      {t("viewDetails")} <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
         </Section>
 
         <SalaryExpectations />
 
-        <Section id="contact" title={t("ctaTitle")}>
-          <div className="space-y-5">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="space-y-3">
-                <p className="max-w-2xl text-[var(--muted-foreground)]">{t("ctaSubtitle")}</p>
-                <div className="flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
-                  <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustResponse")}</span>
-                  <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustStart")}</span>
-                  <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustNda")}</span>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <MagneticButton
-                  className="inline-flex items-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
-                  onClick={() => window.open("https://t.me/your_handle", "_blank", "noopener,noreferrer")}
-                >
-                  <Send size={16} /> {t("telegram")}
-                </MagneticButton>
-                <MagneticButton
-                  className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
-                  onClick={scrollToProjects}
-                >
-                  <Sparkles size={16} /> {t("ctaSecondary")}
-                </MagneticButton>
-              </div>
+        {false ? (
+          <Section id="contact" title={t("ctaTitle")}>
+          <div className="space-y-4">
+            <p className="max-w-2xl text-[var(--muted-foreground)]">{t("ctaSubtitle")}</p>
+            <div className="flex flex-wrap gap-2 text-xs text-[var(--muted-foreground)]">
+              <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustResponse")}</span>
+              <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustStart")}</span>
             </div>
-
-            <div className="rounded-2xl border border-[color:var(--border)] bg-[var(--muted)] p-4">
-              <p className="mb-3 text-sm font-medium text-[var(--card-foreground)]">{t("ctaStepsTitle")}</p>
-              <div className="grid gap-2 sm:grid-cols-3">
-                <p className="rounded-xl border border-[color:var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--muted-foreground)]">1. {t("ctaStep1")}</p>
-                <p className="rounded-xl border border-[color:var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--muted-foreground)]">2. {t("ctaStep2")}</p>
-                <p className="rounded-xl border border-[color:var(--border)] bg-[var(--card)] px-3 py-2 text-sm text-[var(--muted-foreground)]">3. {t("ctaStep3")}</p>
-              </div>
+            <div className="grid grid-cols-1 gap-3 sm:flex">
+              <MagneticButton
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)] sm:w-auto"
+                onClick={() => window.open("https://t.me/semenoff86", "_blank", "noopener,noreferrer")}
+              >
+                <Send size={16} /> {t("telegram")}
+              </MagneticButton>
+              <MagneticButton
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20 sm:w-auto"
+                onClick={scrollToProjects}
+              >
+                <Sparkles size={16} /> {t("ctaSecondary")}
+              </MagneticButton>
             </div>
-
-            <div className="flex flex-col gap-3 border-t border-[color:var(--border)] pt-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="border-t border-[color:var(--border)] pt-4">
               <a
                 href="mailto:semenoff2007@gmail.com"
                 className="inline-flex items-center gap-2 text-[var(--link)] hover:text-[var(--link-hover)]"
               >
                 <Mail size={16} /> semenoff2007@gmail.com
               </a>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--muted-foreground)]">
-                <span className="font-medium text-[var(--card-foreground)]">{t("ctaQuickLinks")}:</span>
-                <button className="hover:text-[var(--link)]" onClick={scrollToProjects}>
-                  {t("ctaLinkProjects")}
-                </button>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[var(--link)]">
-                  <GitBranch size={14} /> {t("ctaLinkGithub")}
-                </a>
-                <a href="mailto:semenoff2007@gmail.com" className="hover:text-[var(--link)]">
-                  {t("ctaLinkEmail")}
-                </a>
-              </div>
             </div>
-
-            <p className="text-xs text-[var(--muted-foreground)]">{t("ctaFooterNote")}</p>
           </div>
-        </Section>
+          </Section>
+        ) : null}
       </div>
     </main>
   );

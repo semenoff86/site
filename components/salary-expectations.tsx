@@ -88,7 +88,7 @@ export function SalaryExpectations() {
           return (
             <motion.article
               key={model.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: idx * 0.08 }}

@@ -1,7 +1,7 @@
 {
   "portfolioLabel": "Selling Portfolio",
   "heroSubtitle": "I automate business, build smart bots, and modern web apps.",
-  "heroTitle1": "Prompt Engineer & AI Agent Architect",
+  "heroTitle1": "",
   "heroQuote": "\"Choose a job you love, and you will never have to work a day in your life\" — Confucius",
   "heroBody": "I do not just write code. I build systems that work for people. I automate business workflows, design intelligent bots, and develop modern web applications so you can focus on what truly matters.",
   "heroTitle2": "Python Developer for Bots & Backend",
@@ -9,11 +9,13 @@
   "viewProjects": "View Projects",
   "contact": "Contact",
   "about": "About Me",
-  "timeline": "Work Experience Timeline",
+  "timeline": "Work Experience",
   "work": {
-    "title": "Опыт работы",
-    "achievements": "Ключевые достижения",
-    "techStack": "Стек технологий"
+    "title": "Work Experience",
+    "achievements": "Key Achievements",
+    "techStack": "Technology Stack",
+    "showAll": "Show full experience",
+    "showLess": "Collapse timeline"
   },
   "skills": "Skills & Tech Stack",
   "projects": "Projects",
@@ -41,8 +43,8 @@
   "telegram": "Message on Telegram",
   "terminalInitial": "👋 This is an interactive terminal: it includes commands, mini-games, and quick info. Type 'help' to see what you can do.",
   "terminalHelpDetailed": "Available commands:\n- help: shows all commands and what each one does\n- skills: displays my tech stack and core skills\n- contact: shows ways to contact me\n- about: short intro about me and my specialization\n- experience: quick overview of my background and focus areas\n- projects: opens the projects section\n- wordle: starts the word guessing game (with language choice)\n- guess: starts the number guessing game (1-100)\n- rps: starts rock-paper-scissors\n- clear: clears the terminal screen\n- exit: collapses the terminal back",
-  "terminalDeferredHint": "The terminal is loaded on demand to speed up initial page load. Press the button below to open commands and games.",
-  "terminalOpen": "Open terminal",
+  "terminalDeferredHint": "Console is ready.",
+  "terminalOpen": "type help for start",
   "terminalUnknown": "unknown command",
   "Salary": {
     "title": "The Price of Intelligence",
