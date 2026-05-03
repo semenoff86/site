@@ -41,6 +41,8 @@
   "ctaLinkEmail": "Email",
   "ctaFooterNote": "© 2026. Focused on outcomes, transparency, and delivery speed.",
   "telegram": "Message on Telegram",
+  "writeEmail": "Email me",
+  "contactEmailAria": "Send email to {email}",
   "terminalInitial": "👋 This is an interactive terminal: it includes commands, mini-games, and quick info. Type 'help' to see what you can do.",
   "terminalHelpDetailed": "Available commands:\n- help: shows all commands and what each one does\n- skills: displays my tech stack and core skills\n- contact: shows ways to contact me\n- about: short intro about me and my specialization\n- experience: quick overview of my background and focus areas\n- projects: opens the projects section\n- wordle: starts the word guessing game (with language choice)\n- guess: starts the number guessing game (1-100)\n- rps: starts rock-paper-scissors\n- clear: clears the terminal screen\n- exit: collapses the terminal back",
   "terminalDeferredHint": "Console is ready.",

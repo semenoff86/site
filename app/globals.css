@@ -21,7 +21,7 @@
   --terminal-bg: #ffffff;
   --terminal-output: #0e7490;
   --terminal-input: #1f2937;
-  --hero-image: url("/gemini-2.jpg");
+  --hero-image: url("/gemini-2.webp");
   --noise-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%23000000' fill-opacity='0.3'%3E%3Ccircle cx='6' cy='8' r='1'/%3E%3Ccircle cx='32' cy='20' r='1'/%3E%3Ccircle cx='58' cy='10' r='1'/%3E%3Ccircle cx='84' cy='24' r='1'/%3E%3Ccircle cx='115' cy='15' r='1'/%3E%3Ccircle cx='18' cy='52' r='1'/%3E%3Ccircle cx='44' cy='40' r='1'/%3E%3Ccircle cx='72' cy='56' r='1'/%3E%3Ccircle cx='104' cy='46' r='1'/%3E%3Ccircle cx='128' cy='60' r='1'/%3E%3Ccircle cx='10' cy='88' r='1'/%3E%3Ccircle cx='37' cy='76' r='1'/%3E%3Ccircle cx='66' cy='95' r='1'/%3E%3Ccircle cx='96' cy='82' r='1'/%3E%3Ccircle cx='124' cy='99' r='1'/%3E%3Ccircle cx='22' cy='122' r='1'/%3E%3Ccircle cx='52' cy='114' r='1'/%3E%3Ccircle cx='82' cy='130' r='1'/%3E%3Ccircle cx='110' cy='118' r='1'/%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -53,7 +53,7 @@
   --terminal-bg: #111827;
   --terminal-output: #67e8f9;
   --terminal-input: #e2e8f0;
-  --hero-image: url("/lucid-origin.jpg");
+  --hero-image: url("/lucid-origin.webp");
 }
 
 body {

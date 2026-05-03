@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
@@ -45,6 +44,11 @@ const SalaryExpectations = dynamic(
     loading: () => <div className="h-80 animate-pulse rounded-3xl border border-[color:var(--border)] bg-[var(--muted)]" />,
   },
 );
+
+/** HTTPS t.me link works reliably in browsers; avoid window.open (popup blockers). */
+const TELEGRAM_CONTACT_URL = "https://t.me/semenoff86";
+const CONTACT_EMAIL = "theo-walcott@yandex.ru";
+const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 
 function Section({
   id,
@@ -93,7 +97,10 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
   const [terminalEnabled, setTerminalEnabled] = useState(false);
   const [showHeroBody, setShowHeroBody] = useState(false);
   const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
-  const heroImage = resolvedTheme === "light" ? "/gemini-2.jpg" : "/lucid-origin.jpg";
+  const hero =
+    resolvedTheme === "light"
+      ? { webp: "/gemini-2.webp", fallback: "/gemini-2.jpg" }
+      : { webp: "/lucid-origin.webp", fallback: "/lucid-origin.jpg" };
 
   const scrollToId = (id: string, offset = 16) => {
     const target = document.querySelector(`#${id}`);
@@ -118,59 +125,78 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
         <div className="absolute right-0 top-1/3 h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.1),transparent_62%)] dark:bg-[radial-gradient(circle,rgba(59,130,246,0.2),transparent_62%)]" />
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-5 px-4 py-4 sm:gap-6 sm:px-6 sm:py-5 lg:py-6">
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-5 px-4 py-4 sm:gap-6 sm:px-6 sm:py-5 lg:py-6">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
           className="premium-noise gradient-border rounded-3xl border border-[color:var(--glass-border)] bg-[var(--glass-bg)] p-4 backdrop-blur-xl sm:p-6"
         >
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <nav className="flex flex-wrap items-center gap-2">
-              <MagneticButton
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
-                onClick={() => window.open("https://t.me/semenoff86", "_blank", "noopener,noreferrer")}
+          <div className="mb-4 flex min-w-0 items-center gap-2 sm:gap-3">
+            <nav className="flex min-w-0 flex-1 flex-nowrap items-center gap-1.5 overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-2 [&::-webkit-scrollbar]:hidden">
+              <a
+                href={TELEGRAM_CONTACT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-3 py-2 text-sm font-medium text-white transition hover:bg-[var(--primary-hover)] sm:gap-2 sm:px-4"
               >
                 <Send size={16} /> {t("telegram")}
-              </MagneticButton>
+              </a>
+              <a
+                href={CONTACT_MAILTO}
+                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-3 py-2 text-sm font-medium text-[var(--card-foreground)] transition hover:bg-slate-200 dark:hover:bg-white/20 sm:gap-2 sm:px-4"
+              >
+                <Mail size={16} /> {t("writeEmail")}
+              </a>
               <MagneticButton
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
+                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-3 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20 sm:gap-2 sm:px-4"
                 onClick={scrollToProjects}
               >
                 <Sparkles size={16} /> {t("viewProjects")}
               </MagneticButton>
               <MagneticButton
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20"
+                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-3 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20 sm:px-4"
                 onClick={() => scrollToId("about")}
               >
                 {t("about")}
               </MagneticButton>
             </nav>
-            <div className="ml-auto flex items-center gap-2 rounded-xl border border-[color:var(--border)] bg-[var(--card)]/85 p-1.5 backdrop-blur-md sm:ml-0">
+            <div className="ml-auto flex shrink-0 items-center gap-2 rounded-xl border border-[color:var(--border)] bg-[var(--card)]/85 p-1.5 backdrop-blur-md">
               <LocaleToggle locale={locale} />
-              <button
-                type="button"
-                aria-label="Open Telegram contact"
-                onClick={() => window.open("https://t.me/semenoff86", "_blank", "noopener,noreferrer")}
+              <a
+                href={TELEGRAM_CONTACT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("telegram")}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--glass-border)] bg-[var(--glass-bg)] text-slate-700 backdrop-blur transition hover:scale-105 hover:text-[var(--primary)] dark:text-cyan-200 dark:hover:text-cyan-100"
               >
                 <Send size={16} />
-              </button>
+              </a>
+              <a
+                href={CONTACT_MAILTO}
+                aria-label={t("contactEmailAria", { email: CONTACT_EMAIL })}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--glass-border)] bg-[var(--glass-bg)] text-slate-700 backdrop-blur transition hover:scale-105 hover:text-[var(--primary)] dark:text-cyan-200 dark:hover:text-cyan-100"
+              >
+                <Mail size={16} />
+              </a>
               <ThemeToggle />
             </div>
           </div>
 
           <div className="mb-6 space-y-4">
             <div className="gradient-border relative h-[210px] overflow-hidden rounded-xl border border-[color:var(--border)] bg-[var(--muted)] sm:h-[260px]">
-              <Image
-                src={heroImage}
-                alt="Portfolio hero background"
-                fill
-                priority
-                fetchPriority="high"
-                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1280px"
-                className="object-cover"
-              />
+              <picture className="absolute inset-0 block">
+                <source srcSet={hero.webp} type="image/webp" />
+                <img
+                  src={hero.fallback}
+                  alt="Portfolio hero background"
+                  width={1536}
+                  height={900}
+                  decoding="async"
+                  fetchPriority="high"
+                  className="h-full w-full object-cover"
+                />
+              </picture>
               <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(124,58,237,0.18),rgba(6,182,212,0.14))]" />
               <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(2,6,23,0.35),rgba(2,6,23,0.05))]" />
             </div>
@@ -225,7 +251,7 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
                 key={metric.label.en}
                 className="gradient-border rounded-2xl border border-[color:var(--border)] bg-[var(--card)] p-4 text-center shadow-[var(--card-shadow)]"
               >
-                <p className="text-xl font-bold text-[var(--year)]">{metric.value[locale]}</p>
+                <p className="text-xl font-semibold text-[var(--year)]">{metric.value[locale]}</p>
                 <p className="mt-1 text-xs text-[var(--muted-foreground)]">{metric.label[locale]}</p>
               </div>
             ))}
@@ -383,12 +409,14 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
               <span className="rounded-full border border-[color:var(--border)] bg-[var(--muted)] px-3 py-1">{t("ctaTrustStart")}</span>
             </div>
             <div className="grid grid-cols-1 gap-3 sm:flex">
-              <MagneticButton
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)] sm:w-auto"
-                onClick={() => window.open("https://t.me/semenoff86", "_blank", "noopener,noreferrer")}
+              <a
+                href={TELEGRAM_CONTACT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--primary)] bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--primary-hover)] sm:w-auto"
               >
                 <Send size={16} /> {t("telegram")}
-              </MagneticButton>
+              </a>
               <MagneticButton
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-sm font-medium text-[var(--card-foreground)] hover:bg-slate-200 dark:hover:bg-white/20 sm:w-auto"
                 onClick={scrollToProjects}
@@ -398,10 +426,10 @@ export function PortfolioPage({ locale }: { locale: "ru" | "en" }) {
             </div>
             <div className="border-t border-[color:var(--border)] pt-4">
               <a
-                href="mailto:semenoff2007@gmail.com"
+                href={CONTACT_MAILTO}
                 className="inline-flex items-center gap-2 text-[var(--link)] hover:text-[var(--link-hover)]"
               >
-                <Mail size={16} /> semenoff2007@gmail.com
+                <Mail size={16} /> {CONTACT_EMAIL}
               </a>
             </div>
           </div>

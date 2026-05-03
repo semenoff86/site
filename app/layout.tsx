@@ -26,9 +26,6 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${firaCode.variable} h-full antialiased`}
     >
-      <head>
-        <link rel="preload" href="/gemini-2.jpg" as="image" fetchPriority="high" />
-      </head>
       <body className="noise-overlay min-h-full bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <WebVitalsReporter />
